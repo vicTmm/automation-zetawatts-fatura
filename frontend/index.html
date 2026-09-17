@@ -1,0 +1,50 @@
+﻿<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zetawatts · Faturas</title><link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="Zetawatts início"><span class="brand-mark">Z</span><span>zetawatts<small>OPERAÇÃO</small></span></a>
+    <div class="nav-label">GESTÃO DE ENERGIA</div>
+    <div class="active-nav"><span aria-hidden="true">▤</span> Faturamento <span class="nav-dot"></span></div>
+    <div class="client-heading"><span>CLIENTES</span><span id="client-count" class="count">0</span></div>
+    <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Buscar cliente" aria-label="Buscar cliente"></label>
+    <nav id="clients" aria-label="Clientes"></nav>
+    <button id="new-client" class="new-client">＋ Novo cliente</button>
+    <div class="sidebar-bottom"><button id="import-button" class="text-button">↥ Importar planilha</button><input type="file" id="import-file" accept=".xlsx" hidden><span class="workspace-icon">Z</span><div><strong>Zetawatts GD</strong><small>Área de operações</small></div></div>
+  </aside>
+  <main>
+    <header class="topbar"><div>Operação <span class="crumb">/</span> <strong>Faturas</strong></div><div class="operator"><span class="live-dot"></span> Operação mensal <span class="avatar">OP</span></div></header>
+    <div class="page">
+      <section class="heading"><div><div class="eyebrow">FATURAMENTO MENSAL</div><h1>Faturas, em um só lugar.</h1><p>Atualize os dados da Enel, confira os valores e gere a fatura.</p></div><div class="month-control"><label for="reference">MÊS DE REFERÊNCIA</label><input id="reference" type="month" min="1900-01" max="2200-12" required></div></section>
+      <div id="global-error" class="notice error" role="alert" hidden></div>
+      <section id="empty-state" class="empty-state" hidden><span class="empty-icon">▤</span><h2>Vamos preparar a primeira fatura</h2><p>Importe a planilha de controle para trazer os clientes e o histórico, ou cadastre um novo cliente.</p><button id="empty-import" class="primary">Importar planilha XLSX</button></section>
+      <div id="workspace" hidden>
+        <section class="client-bar"><div class="client-identity"><span id="client-avatar" class="client-avatar">IC</span><div><h2 id="client-name"></h2><p id="client-detail"></p></div></div><button id="edit-client" class="secondary">Editar cadastro</button></section>
+        <section class="metrics" aria-label="Resumo da fatura"><article><span>Fatura Enel</span><strong id="metric-enel">—</strong><small>Valor informado da distribuidora</small></article><article><span>Fatura ZetaGD</span><strong id="metric-zeta">—</strong><small>Valor a cobrar neste mês</small></article><article class="savings"><span>Desconto total</span><strong id="metric-discount">—</strong><small>Conforme a regra do cliente</small></article></section>
+        <div class="work-grid">
+          <section class="editor card">
+            <div class="tabs" role="tablist"><button id="tab-data" class="tab selected" role="tab" aria-selected="true" aria-controls="data-panel">Dados da fatura</button><button id="tab-history" class="tab" role="tab" aria-selected="false" aria-controls="history-panel">Histórico <span id="history-count"></span></button></div>
+            <div id="data-panel" role="tabpanel" aria-labelledby="tab-data">
+              <div class="editor-intro"><h3>Informações do mês</h3><span id="save-state" class="status">Novo mês</span><p id="rule-name"></p></div>
+              <div id="historical-notice" class="notice" hidden>Este registro preserva uma fórmula antiga ou dados incompletos da planilha. Consulte os valores no histórico e selecione um novo mês para faturar.</div>
+              <form id="invoice-form"><fieldset id="invoice-fields"><div class="fields dates"><label>Vencimento<input id="due-date" type="date" required></label><label>Bandeira<select id="flag-label"><option value="">Não especificada</option><option>Verde</option><option>Amarela</option><option>Vermelha P1</option><option>Vermelha P2</option><option>Outra</option></select></label></div><div id="dynamic-fields"></div><details class="rule-details"><summary>Como este valor é calculado</summary><p id="rule-note"></p><dl id="calculated-details"></dl><small>Valores calculados com precisão decimal. Moedas arredondadas somente no resultado final.</small></details><div class="payment-block"><div><h4>Boleto <span>opcional</span></h4><p>Anexe o recorte já preparado em PNG ou JPG.</p></div><label class="upload-button" for="payment-file">＋ Anexar imagem</label><input id="payment-file" type="file" accept="image/png,image/jpeg" hidden><div id="payment-status" hidden><span id="payment-name"></span><button id="remove-payment" type="button" class="text-button">Remover</button></div></div><label class="notes-label">Observações internas<textarea id="notes" rows="2" maxlength="600" placeholder="Anotações da operação, visíveis somente nesta tela"></textarea></label></fieldset></form>
+              <div id="calculation-error" class="notice error" role="alert" hidden></div><div id="warnings" class="notice" hidden></div>
+              <div class="save-bar"><span id="save-hint">Preencha os dados do mês</span><button id="save-invoice" class="primary" disabled>Salvar fatura</button></div>
+            </div>
+            <div id="history-panel" role="tabpanel" aria-labelledby="tab-history" hidden><div class="history-intro"><h3>Histórico do cliente</h3><p>Valores originais da planilha e faturas salvas.</p></div><div class="history-table-wrap"><table><thead><tr><th>Mês</th><th>Fatura Zeta</th><th>Desconto</th></tr></thead><tbody id="history-rows"></tbody></table></div></div>
+          </section>
+          <section class="preview-card card"><header><div><h3>Prévia da fatura</h3><span>O documento acompanha suas alterações</span></div><span class="pdf-tag">PDF</span></header><div class="preview-area"><div id="preview-placeholder"><span class="empty-icon">▤</span><h3>Sua fatura aparece aqui</h3><p>Preencha os campos e o vencimento para visualizar o documento.</p></div><img id="pdf-preview" alt="Prévia completa da fatura em PDF, com identificação, valores e histórico de consumo" hidden></div><footer><span id="preview-caption">Modelo baseado na fatura ZetaGD</span><button id="download-pdf" class="secondary" disabled>↓ Baixar PDF</button></footer></section>
+        </div>
+        <footer class="page-footer"><span>Dados da Enel inseridos manualmente. Cálculos centralizados por perfil de cliente.</span><span>Zetawatts GD</span></footer>
+      </div>
+    </div>
+  </main>
+  <dialog id="client-dialog"><form id="client-form"><div class="dialog-heading"><div><div class="eyebrow">CADASTRO</div><h2 id="dialog-title">Novo cliente</h2></div><button type="button" id="close-dialog" aria-label="Fechar cadastro">×</button></div><div class="fields"><label>Nome de identificação<input name="name" required maxlength="80" placeholder="Ex.: Icaraí"></label><label>Razão social / nome completo<input name="legal_name" maxlength="160"></label><label>CPF / CNPJ<input name="document" maxlength="30"></label><label>Nº do cliente Enel<input name="installation" maxlength="40"></label><label class="full-width">Endereço<input name="address" maxlength="250"></label><label>Desconto padrão (%)<input name="discount_percent" inputmode="decimal" required value="10"></label><label>Regra de faturamento<select name="rule" id="client-rule"></select></label></div><p class="dialog-help">O cadastro vale para novas faturas. Os documentos já salvos mantêm os dados usados na emissão.</p><div id="client-error" class="notice error" role="alert" hidden></div><div class="dialog-actions"><button type="button" id="cancel-dialog" class="secondary">Cancelar</button><button type="submit" class="primary">Salvar cliente</button></div></form></dialog>
+  <div id="toast" role="status" hidden></div>
+</body>
+</html>
+

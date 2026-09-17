@@ -1,0 +1,193 @@
+[
+  {
+    "sheet": "Faturamento Pio Borges",
+    "reference": "2026-07",
+    "rule": "gd",
+    "inputs": {
+      "consumption": "627",
+      "te_supply": "0.47254",
+      "tusd_supply": "1.04978",
+      "tusd_gd1": "0",
+      "tusd_gd2": "0.56167",
+      "flag": "0.027",
+      "credits_gd1": "0",
+      "credits_gd2": "627",
+      "enel_bill": "341.64",
+      "public_fees": "35.56",
+      "discount_percent": "20"
+    },
+    "expected": {
+      "zeta_bill": "518.76",
+      "discount_total": "146.62",
+      "total": "971.42"
+    }
+  },
+  {
+    "sheet": "Faturamento 235",
+    "reference": "2026-08",
+    "rule": "panel_235",
+    "inputs": {
+      "enel_consumption": "385",
+      "panel_consumption": "520.875",
+      "te": "0.44807",
+      "tusd": "0.99526",
+      "flag": "0.02556",
+      "grid_credits": "285",
+      "enel_bill": "233.25",
+      "discount_percent": "10"
+    },
+    "expected": {
+      "zeta_bill": "964.56",
+      "discount_total": "155.98",
+      "total": "1353.78"
+    }
+  },
+  {
+    "sheet": "Faturamento Essencial",
+    "reference": "2026-07",
+    "rule": "essential",
+    "inputs": {
+      "consumption": "10775",
+      "te": "0.47258",
+      "tusd": "1.04984",
+      "flag": "0.02704",
+      "balance_credits": "0",
+      "current_credits": "1388",
+      "enel_bill": "14976.44",
+      "discount_percent": "10"
+    },
+    "expected": {
+      "zeta_bill": "11.92",
+      "discount_total": "1707.07",
+      "total": "16695.43"
+    }
+  },
+  {
+    "sheet": "Faturamento Geraldo Martins",
+    "reference": "2026-07",
+    "rule": "gd_geraldo",
+    "inputs": {
+      "consumption": "1057",
+      "te_supply": "0.47254",
+      "tusd_supply": "1.0498",
+      "tusd_gd1": "0",
+      "tusd_gd2": "0.56168",
+      "flag": "0.02702",
+      "credits_gd1": "0",
+      "credits_gd2": "1057",
+      "enel_bill": "592.58",
+      "public_fees": "76.64",
+      "discount_percent": "20"
+    },
+    "expected": {
+      "zeta_bill": "874.54",
+      "discount_total": "247.20",
+      "total": "1637.67"
+    }
+  },
+  {
+    "sheet": "Faturamento Itaipu",
+    "reference": "2025-09",
+    "rule": "legacy_total",
+    "inputs": {
+      "consumption": "2314",
+      "te": "0.4114",
+      "tusd": "0.8862",
+      "flag": "0.11045",
+      "balance_credits": "2214",
+      "current_credits": "0",
+      "enel_bill": "670.92",
+      "discount_percent": "10"
+    },
+    "expected": {
+      "zeta_bill": "2016.95",
+      "discount_total": "570.36",
+      "total": "3258.23"
+    }
+  },
+  {
+    "sheet": "Faturamento 281",
+    "reference": "2026-08",
+    "rule": "panel_281",
+    "inputs": {
+      "enel_consumption": "100",
+      "panel_consumption": "-70",
+      "te": "0.415",
+      "tusd": "0.9223",
+      "flag": "0.0236",
+      "grid_credits": "0",
+      "enel_bill": "139.92",
+      "discount_percent": "10"
+    },
+    "expected": {
+      "zeta_bill": "0.00",
+      "discount_total": "2.43",
+      "total": "40.83"
+    }
+  },
+  {
+    "sheet": "Faturamento Laura Jardim",
+    "reference": "2026-08",
+    "rule": "legacy_total",
+    "inputs": {
+      "consumption": "1121",
+      "te": "0.4478",
+      "tusd": "0.9953",
+      "flag": "0.02563",
+      "balance_credits": "1021",
+      "current_credits": "0",
+      "enel_bill": "472.7",
+      "discount_percent": "10"
+    },
+    "expected": {
+      "zeta_bill": "982.93",
+      "discount_total": "190.81",
+      "total": "1646.45"
+    }
+  },
+  {
+    "sheet": "Faturamento Icaraí",
+    "reference": "2026-08",
+    "rule": "spec",
+    "inputs": {
+      "consumption": "4186",
+      "te_supply": "0.44818",
+      "tusd_supply": "0.9955",
+      "te_injected": "0.44818",
+      "tusd_injected": "0.75658",
+      "flag": "0.02564",
+      "balance_credits": "0",
+      "current_credits": "2347",
+      "enel_bill": "3343.48",
+      "discount_percent": "12.500"
+    },
+    "expected": {
+      "zeta_bill": "2474.13",
+      "discount_total": "413.62",
+      "total": "6150.57"
+    }
+  },
+  {
+    "sheet": "Faturamento ZeroHum Maricá",
+    "reference": "2026-08",
+    "rule": "gd",
+    "inputs": {
+      "consumption": "3593",
+      "te_supply": "0.44804",
+      "tusd_supply": "0.99533",
+      "tusd_gd1": "0",
+      "tusd_gd2": "0.53254",
+      "flag": "0.02563",
+      "credits_gd1": "0",
+      "credits_gd2": "3593",
+      "enel_bill": "1741.11",
+      "public_fees": "78.32",
+      "discount_percent": "20"
+    },
+    "expected": {
+      "zeta_bill": "2818.58",
+      "discount_total": "796.73",
+      "total": "5278.12"
+    }
+  }
+]

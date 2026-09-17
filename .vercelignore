@@ -1,0 +1,11 @@
+.venv
+.git
+data
+tmp
+output
+tests
+*.xlsx
+*.pptx
+*.pdf
+.env*
+
